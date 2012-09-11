@@ -40,7 +40,7 @@
 	\titlepage
 \end{frame}
 
-\begin{frame}[t]{Motivation}
+\begin{frame}{Motivation}
 	\begin{block}{Frustrated Erlang programmer}
 		I thought my Erlang program was {\bf 100\% parallelizable}, but when I made it parallel and ran it on a machine with {\bf N CPU cores}, I got a {\bf speedup} that was {\bf much lower than N}. Why?
 	\end{block}
@@ -48,16 +48,32 @@
 
 \begin{frame}[t]{\texttt{bencherl}}
 	\begin{itemize}
-		\item runs benchmarks in an automatic way
-		\item configurable extendable
-examines 
-can examine
-can benchmark 
-public available
-tool
-repository
-examines 5 dimensions
+		\item Serves both as a \textcolor{burgundy}{tool to run and analyze benchmarks} and as an \textcolor{burgundy}{enhanceable benchmark repository}
+		\item Focuses on \textcolor{burgundy}{scalability}, rather than on throughput or latency
+		\item Examines how the following \textcolor{burgundy}{factors} influence the scalability of Erlang applications
+			\begin{itemize}
+				\item Number of Erlang nodes
+				\item Number of CPU cores
+				\item Number of schedulers
+				\item Erlang/OTP release and flavor
+				\item Command-line arguments to \texttt{erl}
+			\end{itemize}
+		\item Can be used to study the performance of any \textcolor{burgundy}{Erlang application}, as well as for the \textcolor{burgundy}{Erlang/OTP} itself
+	\end{itemize}
+\end{frame}
 
+\begin{frame}[t]{Definitions}
+
+	\vspace{5pt}
+	{\bf Application}: The \textcolor{burgundy}{piece of software} whose execution behaviour we intend to measure and analyze.
+
+    \vspace{5pt}
+	{\bf Benchmark}: A specific \textcolor{burgundy}{use case} of the \textcolor{burgundy}{application} that includes setting up the environment, calling specific functions and using specific data.
+
+    \vspace{5pt}
+	{\bf Runtime environment}: A specific combination of values for the \textcolor{burgundy}{scalability factors}.
+	\begin{itemize}
+		\item E.g. 8 \textcolor{burgundy}{Erlang nodes} on a machine with 64 \textcolor{burgundy}{CPU cores} using 8 \textcolor{burgundy}{schedulers} on each node and running Erlang/OTP R15B02 \textcolor{burgundy}{release} with \textcolor{burgundy}{command-line arguments} "+sbt db" 
 	\end{itemize}
 \end{frame}
 
@@ -70,11 +86,11 @@ examines 5 dimensions
 \begin{frame}[t]{Coordinator}
 	{\bf The module that coordinates everything during a \texttt{bencherl} run.}
 	\begin{itemize}
-		\item Determines the {\bf benchmarks} that should be executed
-		\item Determines the {\bf runtime environments}, where each benchmark should be executed
-		\item Sets up each runtime environment before a benchmark is executed in it
+		\item Determines the \textcolor{burgundy}{benchmarks} that should be executed
+		\item Determines the \textcolor{burgundy}{runtime environments}, where each benchmark should be executed
+		\item \textcolor{burgundy}{Sets up} each runtime environment before a benchmark is executed in it
 		\item Prepares instruction files for the \textcolor{burgundy}{executor}
-		\item Performs any benchmark-specific pre- and post-execution actions
+		\item Performs any \textcolor{burgundy}{benchmark-specific pre- and post-execution actions}
 	\end{itemize}
 \end{frame}
 
@@ -82,11 +98,11 @@ examines 5 dimensions
 	{\bf The module that executes a particular benchmark in a particular runtime environment.}
 	\begin{itemize}
 		\item Receives detailed instructions from the \textcolor{burgundy}{executor} about what to do 
-		\item Starts any necessary Erlang slave nodes
-		\item Executes the benchmark in a new process
-		\item Stops the Erlang slave nodes it started
-		\item Makes sure that the output that the benchmark produced during its execution is written in an output file
-		\item Makes sure that the measurements that are collected during the execution of the benchmark are written in a measument file 
+		\item \textcolor{burgundy}{Starts} any necessary Erlang slave nodes
+		\item \textcolor{burgundy}{Executes} the benchmark in a new process
+		\item \textcolor{burgundy}{Stops} the Erlang slave nodes it started
+		\item Makes sure that the \textcolor{burgundy}{output} that the benchmark produced during its execution is written in an output file
+		\item Makes sure that the \textcolor{burgundy}{measurements} that are collected during the execution of the benchmark are written in a measument file 
 			\begin{itemize}
 				\item Uses \texttt{erlang:now/0} and \texttt{timer:diff/2}
 			\end{itemize}
@@ -96,10 +112,10 @@ examines 5 dimensions
 \begin{frame}[t]{Sanity checker}
 	{\bf The module that checks whether all executions of a particular benchmark produced the same output.}
     \begin{itemize}
-		\item Runs after a benchmark has executed in all desired runtime environments
-		\item Examines the output that the benchmark produced in all runtime environments
-		\item Decides whether the benchmark was successfully executed in all runtime environments
-		\item Is based on the assumption that if a benchmark produces any output during its execution, then this output should be the same accross all runtime environments, where the benchmark was executed
+		\item Runs \textcolor{burgundy}{after} a benchmark has executed in all desired runtime environments
+		\item \textcolor{burgundy}{Examines} the output that the benchmark produced in all runtime environments
+		\item Decides whether the benchmark was \textcolor{burgundy}{successfully executed} in all runtime environments
+		\item Is based on the assumption that if a benchmark produces any output during its execution, then this output should be \textcolor{burgundy}{the same accross all runtime environments}, where the benchmark was executed
 			\begin{itemize}
 				\item Uses \texttt{diff}
 			\end{itemize}
@@ -109,10 +125,12 @@ examines 5 dimensions
 \begin{frame}[t]{Graph plotter}
 	{\bf The module that plots scalability graps based on the collected measurements.}
     \begin{itemize}
-		\item Runs after a benchmark has executed in all desired runtime environments
-		\item Processes the measurements that were collected during the execution of the benchmark
+		\item Runs \textcolor{burgundy}{after} a benchmark has executed in all desired runtime environments
+		\item Processes the \textcolor{burgundy}{measurements} that were collected during the execution of the benchmark
 		\item Plots a set of scalability graphs
-		\item Uses \texttt{Gnuplot}
+			\begin{itemize}
+				\item Uses \texttt{Gnuplot}
+			\end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -125,85 +143,103 @@ examines 5 dimensions
 	\texttt{bencherl} comes with an initial collection of benchmarks.
     \vspace{10pt}
 	\begin{columns}[t]
-		\begin{column}{0.45\textwidth}
+		\begin{column}{0.5\textwidth}
 			\begin{center}
-			{\bf SYNTHETIC}
+			\textcolor{burgundy}{synthetic}
 			\begin{columns}
-				\begin{column}{0.45\textwidth}
+				\begin{column}{0.6\textwidth}
 					\begin{itemize}
-						\item[] bang
-						\item[] big
-						\item[] ehb
-						\item[] ets\_test
-						\item[] genstress
-						\item[] mbrot
+						\item[] \texttt{bang}
+						\item[] \texttt{big}
+						\item[] \texttt{ehb}
+						\item[] \texttt{ets\_test}
+						\item[] \texttt{genstress}
+						\item[] \texttt{mbrot}
 					\end{itemize}
 				\end{column}
 				\begin{column}{0.45\textwidth}
 					\begin{itemize}
-						\item[] orbit\_int
-						\item[] parallel
-						\item[] pcmark
-						\item[] ran
-						\item[] serialmsg
-						\item[] timer\_wheel
+						\item[] \texttt{orbit\_int}
+						\item[] \texttt{parallel}
+						\item[] \texttt{pcmark}
+						\item[] \texttt{ran}
+						\item[] \texttt{serialmsg}
+						\item[] \texttt{timer\_wheel}
 					\end{itemize}
 				\end{column}
 			\end{columns}
 			\end{center}	
 		\end{column}
-        \begin{column}{0.45\textwidth}
+        \begin{column}{0.3\textwidth}
 			\begin{center}	
-			{\bf REAL-WORLD}
+			\textcolor{burgundy}{real-world}
 			\begin{itemize}
-				\item[] dialyzer\_bench
-				\item[] scalaris\_bench
+				\item[] \texttt{dialyzer\_bench}
+				\item[] \texttt{scalaris\_bench}
 			\end{itemize}
 			\end{center}
         \end{column}
 	\end{columns}	
-	\vspace{10pt}
-	This collection can be enhanced in a number of simple steps.
+	\vspace{20pt}
+	This collection can be \textcolor{burgundy}{enhanced} in two simple steps.
 \end{frame}
 
 \begin{frame}[t]{Step 1: Add in \texttt{bencherl} everything that the benchmark needs for its execution.}
 	\begin{itemize}
-		\item The sources of the Erlang application that it benchmarks
-		\item Any scripts to run before or after its execution
-		\item Any data that it needs for its execution
+		\item The sources of the \textcolor{burgundy}{Erlang application} that it benchmarks
+			\begin{itemize}
+				\item E.g. \texttt{dialyzer}
+			\end{itemize}
+		\item Any \textcolor{burgundy}{scripts} to run \textcolor{burgundy}{before} or \textcolor{burgundy}{after} its execution
+            \begin{itemize}
+                \item E.g. a script that starts \texttt{scalaris}
+            \end{itemize}
+		\item Any \textcolor{burgundy}{data} that it needs for its execution
+            \begin{itemize}
+                \item E.g. for \texttt{dialyzer\_bench} the BEAM files
+            \end{itemize}
+		\item Any specific \textcolor{burgundy}{configuration settings} that it requires
+            \begin{itemize}
+                \item E.g. a specific cookie that nodes should share
+            \end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Step 2: Write the handler for the benchmark.}
-	A benchmark handler is a standard Erlang module that exports two functions.
+	A \textcolor{burgundy}{benchmark handler} is a standard Erlang module that exports two functions.
 	\vspace{10pt}
 
-	A function that returns the different argument sets that should be used for running a specific version of the benchmark:
+	\textcolor{burgundy}{\texttt{bench\_args}}: a function that returns the different argument sets that should be used for running a specific version of the benchmark
 
-	\begin{lstlisting}[basicstyle=\tiny,frame=single]
+	\tiny
+	\begin{verbatim}
 bench_args(Vrsn, Conf) -> Args
   when
     Vrsn :: 'short' | 'intermediate' | 'long',
     Conf :: [{Key :: atom(), Val :: term()}, ...],
     Args :: [[term()]].
-	\end{lstlisting}
+	\end{verbatim}
+	\normalsize
 
-	A function that uses a specific argument set, specific Erlang slave nodes and specific configuration settings to run the benchmark:
+	\textcolor{burgundy}{\texttt{run}}: a function that runs the benchmark on specific Erlang nodes, with specific arguments and configuration settings
 
-    \begin{lstlisting}[basicstyle=\tiny,frame=single]
+	\tiny
+    \begin{verbatim}
 run(Args, Slaves, Conf) -> 'ok' | {'error', Reason}
   when
     Args   :: [term()],
     Slaves :: [node()],
     Conf   :: [{Key :: atom(), Val :: term()}, ...],
     Reason :: term().
-	\end{lstlisting}
+	\end{verbatim}
+	\normalsize
 
 \end{frame}
 
 \begin{frame}[fragile]{A benchmark handler example}
 
-    \begin{lstlisting}[basicstyle=\tiny,frame=single]
+	\tiny
+    \begin{verbatim}
 -module(scalaris_bench).
 
 -include_lib("kernel/include/inet.hrl").
@@ -226,7 +262,8 @@ run([T,I,V|_], _, _) ->
 	rpc:block_call(list_to_atom(Node), api_vm, add_nodes, [V]),
 	io:format("~p~n", [rpc:block_call(list_to_atom(Node), bench, quorum_read, [T,I])]),
 	ok.
-	\end{lstlisting}
+	\end{verbatim}
+	\normalsize
 \end{frame}
 
 \begin{frame}{Experience \#1: Some benchmarks scale well.}
@@ -262,11 +299,27 @@ run([T,I,V|_], _, _) ->
 
 \begin{frame}[t]{Conclusions}
 	\begin{itemize}
-		\item 
+		\item \texttt{bencherl} is a publicly available, \textcolor{burgundy}{scalability} benchmark suite for Erlang/OTP
+			\begin{itemize}
+				\item \texttt{http://release.softlab.ntua.gr/bencherl}
+			\end{itemize} 
+		\item Examines how nodes, cores, schedulers, Erlang/OTP versions and \texttt{erl} command-line options affect the scalability of Erlang applications
+		\item Collects scalability measurements
+		\item Plots scalability graphs
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Future work}
+	\begin{itemize}
+		\item \texttt{bencherl} currently collects only execution times
+			\begin{itemize}
+				\item Collect more information during the execution of a benchmark (e.g. heap size)
+			\end{itemize}
+		\item \texttt{bencherl} currently can only answer to the question "Does this application scale well for this scenario?"
+            \begin{itemize}
+            	\item Try to answer questions like "Why doesn't this application scale well for this scenario?" 
+			\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
