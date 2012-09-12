@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.12.5)  11 SEP 2012 18:11
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.12.5)  12 SEP 2012 02:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1030,7 +1030,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 337.
 Here is how much of TeX's memory you used:
  16816 strings out of 493633
  313569 string characters out of 3143377
- 385226 words of memory out of 3000000
+ 385225 words of memory out of 3000000
  19662 multiletter control sequences out of 15000+200000
  12791 words of font info for 50 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
@@ -1046,7 +1046,7 @@ al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/loca
 l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/t
 exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on bencherl-presentation.pdf (22 pages, 200077 bytes).
+Output written on bencherl-presentation.pdf (22 pages, 200083 bytes).
 PDF statistics:
  237 PDF objects out of 1000 (max. 8388607)
  176 compressed objects within 2 object streams
