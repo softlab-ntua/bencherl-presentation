@@ -55,7 +55,7 @@
 				\item Number of Erlang nodes
 				\item Number of CPU cores
 				\item Number of schedulers
-				\item Erlang/OTP release and flavor
+				\item Erlang/OTP releases and flavors
 				\item Command-line arguments to \texttt{erl}
 			\end{itemize}
 		\item Can be used to study the performance of any \textcolor{burgundy}{Erlang application}, as well as the \textcolor{burgundy}{Erlang/OTP} itself
@@ -75,10 +75,10 @@
         E.g. 
         \begin{itemize}
         \item 8 \textcolor{burgundy}{Erlang nodes}
-        \item on a machine with 64 \textcolor{burgundy}{CPU cores}
-        \item using 8 \textcolor{burgundy}{schedulers} on each node
-        \item running Erlang/OTP \textcolor{burgundy}{release} R15B02 
-        \item with \textcolor{burgundy}{command-line arguments} ``+sbt db'' 
+        \item each node runs on a machine with 8 \textcolor{burgundy}{CPU cores}
+        \item each node uses 8 \textcolor{burgundy}{schedulers}
+        \item each node runs the R15B02 \textcolor{burgundy}{release of Erlang/OTP}
+        \item each node passes ``+sbt db'' as \textcolor{burgundy}{command-line arguments to \texttt{erl}}
         \end{itemize}
 \end{frame}
 
@@ -335,6 +335,7 @@ run([T,I,V|_], _, _) ->
 		\item Examines how \textcolor{burgundy}{nodes}, \textcolor{burgundy}{cores}, \textcolor{burgundy}{schedulers}, \textcolor{burgundy}{Erlang/OTP versions} and \textcolor{burgundy}{\texttt{erl} command-line options} affect the scalability of Erlang applications
 		\item Collects \textcolor{burgundy}{scalability measurements}
 		\item Plots \textcolor{burgundy}{scalability graphs}
+		\item Serves as a \textcolor{burgundy}{benchmark repository}, where people can add their own benchmarks, so that they can be accessed and used by other people
 	\end{itemize}
 \end{frame}
 
