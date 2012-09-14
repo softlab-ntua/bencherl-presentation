@@ -107,7 +107,7 @@
 		\item \textcolor{burgundy}{Executes} the benchmark in a new process
 		\item \textcolor{burgundy}{Stops} the Erlang slave nodes it started
 		\item Makes sure that the \textcolor{burgundy}{output} produced by the benchmark during its execution is written in an output file
-		\item Makes sure that the \textcolor{burgundy}{measurements} collected during the execution of the benchmark are written in a measument file 
+		\item Makes sure that the \textcolor{burgundy}{measurements} collected during the execution of the benchmark are written in a measurement file 
 			\begin{itemize}
 				\item Uses \texttt{erlang:now/0} and \texttt{timer:diff/2}
 			\end{itemize}
@@ -120,7 +120,7 @@
 		\item Runs \textcolor{burgundy}{after} a benchmark has executed in all desired runtime environments
 		\item \textcolor{burgundy}{Examines} the output produced by the benchmark in all runtime environments
 		\item Decides whether the benchmark was \textcolor{burgundy}{successfully executed} in all runtime environments
-		\item Is based on the assumption that if a benchmark produces any output during its execution, then this output should be \textcolor{burgundy}{the same accross all runtime environments}, where the benchmark was executed
+		\item Is based on the assumption that if a benchmark produces any output during its execution, then this output should be \textcolor{burgundy}{the same across all runtime environments}, where the benchmark was executed
 			\begin{itemize}
 				\item Uses \texttt{diff}
 			\end{itemize}
@@ -128,7 +128,7 @@
 \end{frame}
 
 \begin{frame}[t]{Graph plotter}
-	{\bf The module that plots scalability graps based on the collected measurements.}
+	{\bf The module that plots scalability graphs based on the collected measurements.}
     \begin{itemize}
 		\item Runs \textcolor{burgundy}{after} a benchmark has executed in all desired runtime environments
 		\item Processes the \textcolor{burgundy}{measurements} that were collected during the execution of the benchmark
